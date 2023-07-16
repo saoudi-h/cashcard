@@ -1,6 +1,5 @@
 package com.saoudi.cashcard;
 
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class CashCardController {
 
     @GetMapping("/{requestedId}")
-    public ResponseEntity<String> findById(){
-        return ResponseEntity.ok("{}");
+    public ResponseEntity<CashCard> findById(@PathVariable Long requestedId) {
+        if (requestedId.equals(99L)) {
+            CashCard cashCard = new CashCard(99L, 123.45);
+            return ResponseEntity.ok(cashCard);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

@@ -8,6 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CashcardApplication {
 
     public static void main(String[] args) {
+
+        String test = "foo";
+        System.out.println(test);
+
         SpringApplication.run(CashcardApplication.class, args);
     }
 }

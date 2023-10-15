@@ -1,18 +1,19 @@
+/* (C)2023 */
 package com.saoudi.cashcard;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Optional;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/cashcards")
 public class CashCardController {
 
     private CashCardRepository cashCardRepository;
-    public CashCardController(CashCardRepository cashCardRepository){
+
+    public CashCardController(CashCardRepository cashCardRepository) {
         this.cashCardRepository = cashCardRepository;
     }
 
@@ -27,12 +28,11 @@ public class CashCardController {
     }
 
     @PostMapping
-    private ResponseEntity<Void> createCashCard(@RequestBody CashCard newCashCardRequest, UriComponentsBuilder ucb) {
+    private ResponseEntity<Void> createCashCard(
+            @RequestBody CashCard newCashCardRequest, UriComponentsBuilder ucb) {
         CashCard savedCashCard = cashCardRepository.save(newCashCardRequest);
-        URI locationOfNewCashCard = ucb
-                .path("cashcards/{id}")
-                .buildAndExpand(savedCashCard.id())
-                .toUri();
+        URI locationOfNewCashCard =
+                ucb.path("cashcards/{id}").buildAndExpand(savedCashCard.id()).toUri();
         System.out.println("#".repeat(50));
         System.out.println(locationOfNewCashCard);
         System.out.println("#".repeat(50));
